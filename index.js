@@ -13,9 +13,11 @@ const mongoose = require("mongoose");
 
 const mongoString = process.env.DATABASE_URL;
 
+mongoose.set("strictQuery", false);
+
 mongoose.connect(mongoString, (error) => {
   if (error) console.log(error);
-  else console.log("Connected to MongoDB");
+  else console.log("Connected to MongoDB Database");
 });
 
 const PORT = 3000;
@@ -32,35 +34,6 @@ app.use("/api", routes);
 
 //One is the base endpoint, and the other is the contents of the routes. Now, all our endpoints will start from '/api'.
 // const router = express.Router();
-
-//Create all methods
-
-// Post Method
-// routes.post("/post", (req, res) => {
-//   res.send("Post your API");
-// });
-
-// const Model = require("./models/model");
-
-// Get all Method
-// routes.get("/get", (req, res) => {
-//   res.send("Get your API");
-// });
-
-// //Get by ID Method
-// routes.get("/get/:id", (req, res) => {
-//   res.send(`Get by ${req.params.id} API`);
-// });
-
-// //Update by ID Method
-// routes.patch("/update/:id", (req, res) => {
-//   res.send("Update by ID API");
-// });
-
-// //Delete by ID Method
-// routes.delete("/delete/:id", (req, res) => {
-//   res.send("Delete by ID API");
-// });
 
 app.listen(3000, () => {
   console.log(`Server Started at ${PORT}`);
