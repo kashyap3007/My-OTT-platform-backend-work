@@ -6,9 +6,13 @@ const productSchema = new mongoose.Schema({
     required: true,
     type: String,
   },
-  age: {
+  image: {
     required: true,
-    type: Number,
+    type: Buffer,
+  },
+  details: {
+    required: true,
+    type: String,
   },
 });
 
