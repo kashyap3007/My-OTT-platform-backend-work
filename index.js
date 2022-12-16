@@ -13,36 +13,23 @@ const mongoose = require("mongoose");
 
 const mongoString = process.env.DATABASE_URL;
 
-// mongoose.set("strictQuery", false);
-
-// console.log(mongoString);
-
-// mongoose.connect(mongoString);
-
 mongoose.connect(mongoString, (error) => {
   if (error) console.log(error);
   else console.log("Connected to MongoDB");
 });
 
-// mongoose.connect("mongodb://localhost:27017/test", (error) => {
-//   if (error) console.log(error);
-//   else console.log("Done");
-// });
 const PORT = 3000;
 
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 // This method returns the middleware that only parses JSON and only looks at the requests where the content-type header matches the type option.
 
 const routes = require("./routes/routes");
 
 app.use("/api", routes);
 
-app.use("/ayush", (req, res) => {
-  console.log("Helloooooo");
-  res.send("Hii");
-});
 //One is the base endpoint, and the other is the contents of the routes. Now, all our endpoints will start from '/api'.
 // const router = express.Router();
 
