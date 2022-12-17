@@ -8,7 +8,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-
+const fileUpload = require("express-fileupload");
 // dot env connection
 
 const mongoString = process.env.DATABASE_URL;
@@ -31,6 +31,7 @@ app.use(express.urlencoded({ extended: false }));
 const routes = require("./routes/routes");
 
 app.use("/api", routes);
+app.use(fileUpload());
 
 //One is the base endpoint, and the other is the contents of the routes. Now, all our endpoints will start from '/api'.
 // const router = express.Router();

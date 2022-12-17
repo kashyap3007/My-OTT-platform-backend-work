@@ -15,12 +15,15 @@ const Model = require("../models/model");
 router.post("/post", async (req, res) => {
   try {
     // console.log("wtf");
-    // console.log(req.body);
+    console.log(req.body);
     // console.log(req.body.name, req.body.age);
+    console.log(req.files);
     const data = new Model({
       name: req.body.name,
-      age: req.body.age,
+      // image: req.body.image,
+      details: req.body.details,
     });
+
     // console.log(data);
     const dataToSave = await data.save();
     // console.log(dataToSave);
