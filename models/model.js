@@ -7,8 +7,7 @@ const productSchema = new mongoose.Schema({
     type: String,
   },
   image: {
-    required: true,
-    type: String,
+    data: Buffer,
   },
   details: {
     required: true,

@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 const Model = require("../models/model");
-// const fs = require("fs");
+const fs = require("fs");
 const path = require("path");
 
 // router function of express ko call kr die
@@ -15,26 +15,40 @@ router.get("/", (req, res) => {
 });
 
 router.get("/home", (req, res) => {
-  console.log("Madarchod");
   console.log(__dirname);
   res.sendFile(path.join(__dirname, "../index.html"));
+});
+router.get("/image" , async (req , res) => {
+  try {
+    Model.findById("639dec049fbccc2cc5609760", (err , data)=> {
+      const src = `data:image/png;base64,${Buffer.from(data.image.data).toString('base64')}`
+      console.log("returning ");
+      return res.json({src});
+    });
+  }
+  catch(err) {
+    console.log(err);
+  }
 });
 
 router.post("/post", async (req, res) => {
   try {
     // console.log(req.body);
-    // const file = req.files.myFile;
+    const file = req.files.myFile;
     // const { name } = req.body;
     // console.log(req.files.name  , "Name");
     // is a buffer console.log(file.data);
     const data = new Model({
       name: req.body.name,
-      image: req.body.image,
+      image: {
+        data : file.data,
+        contentType: 'image/png'
+      },
       details: req.body.details,
     });
 
-    console.log(data);
-    // const dataToSave = await data.save();
+    // console.log(data);
+    const dataToSave = await data.save();
     // console.log(dataToSave);
     res.status(201).json(data);
   } catch (error) {

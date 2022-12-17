@@ -8,13 +8,25 @@
 <body>
 	<input type = "file" id = "file"/>
 	<button id = "upload">Upload</button>
+	<image src = "" id = "image"/>
+	<button id = "getimage">Get Image</button>
 	<script type="text/javascript">
+		document.getElementById("getimage").addEventListener("click" ,() => {
+			fetch("http://localhost:3000/api/image")
+			.then(res => res.json())
+			.then(res => {
+				// console.log(res);
+				document.getElementById("image").src = res.src;
+			})
+			.catch(err => alert(err));
+		});
 		document.getElementById("upload").addEventListener("click" ,() => {
 			const data = document.getElementById("file").files[0];
 			if(!data) return;
 			const formData = new FormData();
 			formData.append('myFile', data);
 			formData.append("name", "Amit");
+			formData.append("details", "some details");
 			// console.log(formData);
 			fetch("http://localhost:3000/api/post", {
 				method : "POST",
