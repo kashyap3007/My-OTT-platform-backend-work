@@ -9,48 +9,51 @@ const path = require("path");
 // router function of express ko call kr die
 //we are using Router from Express, and we are exporting it too using module.exports.
 
-router.get("/", (req, res) => {
-  console.log("inside");
-  res.send("working");
-});
+// router.get("/", (req, res) => {
+//   console.log("inside");
+//   res.send("working");
+// });
 
-router.get("/home", (req, res) => {
-  console.log(__dirname);
-  res.sendFile(path.join(__dirname, "../index.html"));
-});
-router.get("/image" , async (req , res) => {
-  try {
-    Model.findById("639dec049fbccc2cc5609760", (err , data)=> {
-      const src = `data:image/png;base64,${Buffer.from(data.image.data).toString('base64')}`
-      console.log("returning ");
-      return res.json({src});
-    });
-  }
-  catch(err) {
-    console.log(err);
-  }
-});
+// router.get("/home", (req, res) => {
+//   console.log(__dirname);
+//   res.sendFile(path.join(__dirname, "../index.html"));
+// });
+// router.get("/image", async (req, res) => {
+//   try {
+//     Model.findById("639e10b1b9b726f8f524069e", (err, data) => {
+//       const src = `data:image/png;base64,${Buffer.from(
+//         data.image.data
+//       ).toString("base64")}`;
+//       console.log("returning ");
+//       return res.json({ src });
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// });
 
 router.post("/post", async (req, res) => {
   try {
     // console.log(req.body);
-    const file = req.files.myFile;
+    const file = req.files.image;
+    // console.log(file.data);
     // const { name } = req.body;
-    // console.log(req.files.name  , "Name");
+    // console.log(req.files.name, "image");
     // is a buffer console.log(file.data);
     const data = new Model({
       name: req.body.name,
       image: {
-        data : file.data,
-        contentType: 'image/png'
+        data: file.data,
+        contentType: "image/png/jpg/jpeg",
       },
       details: req.body.details,
     });
 
     // console.log(data);
+    console.log("Never ever come again in my life");
     const dataToSave = await data.save();
     // console.log(dataToSave);
-    res.status(201).json(data);
+    res.status(200).json(data);
   } catch (error) {
     // console.log("Galat hai");
     res.status(400).json({ message: error.message });
