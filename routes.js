@@ -3,6 +3,8 @@ const express = require("express");
 const router = express.Router();
 
 const Model = require("../models/model");
+const fs = require("fs");
+const path = require("path");
 
 // router function of express ko call kr die
 //we are using Router from Express, and we are exporting it too using module.exports.
@@ -11,23 +13,27 @@ const Model = require("../models/model");
 //   console.log("inside");
 //   res.send("working")
 // });
-
+router.get("/home" , (req , res) => {
+  // console.log(__dirname);
+  res.sendFile(path.join(__dirname , "../index.html"));
+});
 router.post("/post", async (req, res) => {
   try {
-    // console.log("wtf");
-    console.log(req.body);
-    // console.log(req.body.name, req.body.age);
-    console.log(req.files);
+    // console.log(req.body);
+    const file = req.files.myFile;
+    const {name} = req.body;
+    // console.log(req.files.name  , "Name");
+    // is a buffer console.log(file.data);
     const data = new Model({
       name: req.body.name,
-      // image: req.body.image,
+      image : file.data,
       details: req.body.details,
     });
 
-    // console.log(data);
-    const dataToSave = await data.save();
-    // console.log(dataToSave);
-    res.status(201).json(dataToSave);
+    // // console.log(data);
+    // const dataToSave = await data.save();
+    // // console.log(dataToSave);
+    res.status(201).json({name : "fello"});
   } catch (error) {
     // console.log("Galat hai");
     res.status(400).json({ message: error.message });
