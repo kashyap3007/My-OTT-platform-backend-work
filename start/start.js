@@ -3,35 +3,6 @@ const express = require("express");
 const router = express.Router();
 
 const Model = require("../models/model");
-const fs = require("fs");
-const path = require("path");
-
-// console.log(Model);
-// router function of express ko call kr die
-//we are using Router from Express, and we are exporting it too using module.exports.
-
-// router.get("/", (req, res) => {
-//   console.log("inside");
-//   res.send("working");
-// });
-
-// router.get("/home", (req, res) => {
-//   console.log(__dirname);
-//   res.sendFile(path.join(__dirname, "../index.html"));
-// });
-// router.get("/image", async (req, res) => {
-//   try {
-//     Model.findById("639e10b1b9b726f8f524069e", (err, data) => {
-//       const src = `data:image/png;base64,${Buffer.from(
-//         data.image.data
-//       ).toString("base64")}`;
-//       console.log("returning ");
-//       return res.json({ src });
-//     });
-//   } catch (err) {
-//     console.log(err);
-//   }
-// });
 
 router.post("/post", async (req, res) => {
   try {
@@ -52,7 +23,7 @@ router.post("/post", async (req, res) => {
 
     // console.log(Model);
     // console.log(data);
-    // console.log("Never ever come again in my life");
+    console.log("Never ever come again in my life");
     const dataToSave = await data.save();
     // console.log(dataToSave);
     res.status(200).json(data);

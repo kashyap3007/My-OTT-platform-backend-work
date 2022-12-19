@@ -38,6 +38,10 @@ app.use("/api", routes);
 //One is the base endpoint, and the other is the contents of the routes. Now, all our endpoints will start from '/api'.
 // const router = express.Router();
 
+// Ye wala corrouseles k liye
+const start = require("./start/start");
+app.use("/start", start);
+
 app.listen(3000, () => {
   console.log(`Server Started at ${PORT}`);
 });
