@@ -23,7 +23,7 @@ mongoose.connect(mongoString, (error) => {
   else console.log("Connected to MongoDB Database");
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(cors());
@@ -33,15 +33,15 @@ app.use(express.urlencoded({ extended: false }));
 
 const routes = require("./routes/routes");
 app.use(fileUpload());
-app.use("/api", routes);
+app.use("/hotstar", routes);
 
 //One is the base endpoint, and the other is the contents of the routes. Now, all our endpoints will start from '/api'.
 // const router = express.Router();
 
 // Ye wala corrouseles k liye
-const start = require("./start/start");
-app.use("/start", start);
+// const start = require("./start/start");
+// app.use("/start", start);
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log(`Server Started at ${PORT}`);
 });

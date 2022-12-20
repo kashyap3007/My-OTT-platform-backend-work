@@ -62,14 +62,38 @@ router.post("/post", async (req, res) => {
   }
 });
 
+router.get("/start/get", async (req, res) => {
+  try {
+    let data = await Model.find().limit(3);
+    // console.log("inside");
+    data = await data.map((info) => {
+      const src = `data:image/png;base64,${Buffer.from(
+        info.image.data
+      ).toString("base64")}`;
+      // src , name and details bhej do
+      return { src, name: info.name, details: info.details };
+    });
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
 router.get("/get", async (req, res) => {
   try {
-    const data = await Model.find();
+    let data = await Model.find();
+    // console.log("inside");
+    data = await data.map((info) => {
+      const src = `data:image/png;base64,${Buffer.from(
+        info.image.data
+      ).toString("base64")}`;
+      // src , name and details bhej do
+      return { src, name: info.name, details: info.details };
+    });
     res.json(data);
-    //Sends data in JSON format and ends the request
-    // console.log(data);
-    // res.
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 });
