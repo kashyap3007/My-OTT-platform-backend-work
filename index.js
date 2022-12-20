@@ -1,10 +1,3 @@
-// Downloading express , nodemon , dotenv , mongoose
-
-// Express will be used for the middleware to create various CRUD endpoints.
-// Mongoose for managing data in MongoDB using various queries.
-// Nodemon to restart our server every time we save our file.
-// Dotenv to manage a .env file.
-
 require("dotenv").config();
 const express = require("express");
 var cors = require("cors");

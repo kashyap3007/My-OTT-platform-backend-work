@@ -83,6 +83,7 @@ router.get("/start/get", async (req, res) => {
 router.get("/get", async (req, res) => {
   try {
     let data = await Model.find();
+<<<<<<< HEAD
     // console.log("inside");
     data = await data.map((info) => {
       const src = `data:image/png;base64,${Buffer.from(
@@ -90,6 +91,12 @@ router.get("/get", async (req, res) => {
       ).toString("base64")}`;
       // src , name and details bhej do
       return { src, name: info.name, details: info.details };
+=======
+    console.log("iside");;
+    data = await data.map(info => {
+      const src = `data:image/png;base64,${Buffer.from(info.image.data).toString("base64")}`;
+      return {src, name : info.name , details :info.details};
+>>>>>>> 5f1545885d835e15b32c7970ef520f2077afdf5d
     });
     res.json(data);
   } catch (error) {
