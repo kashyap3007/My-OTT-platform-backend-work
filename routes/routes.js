@@ -68,9 +68,8 @@ router.get("/get", async (req, res) => {
     console.log("iside");;
     data = await data.map(info => {
       const src = `data:image/png;base64,${Buffer.from(info.image.data).toString("base64")}`;
-      return src;
+      return {src, name : info.name , details :info.details};
     });
-    // console.log(data);s
     res.json(data);
   } catch (error) {
     console.log(error);
