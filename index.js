@@ -34,6 +34,7 @@ app.use("/hotstar", routes);
 // Ye wala corrouseles k liye
 // const start = require("./start/start");
 // app.use("/start", start);
+// Index.js done
 
 app.listen(PORT, () => {
   console.log(`Server Started at ${PORT}`);
