@@ -1,10 +1,3 @@
-// Downloading express , nodemon , dotenv , mongoose
-
-// Express will be used for the middleware to create various CRUD endpoints.
-// Mongoose for managing data in MongoDB using various queries.
-// Nodemon to restart our server every time we save our file.
-// Dotenv to manage a .env file.
-
 require("dotenv").config();
 const express = require("express");
 var cors = require("cors");
@@ -23,7 +16,7 @@ mongoose.connect(mongoString, (error) => {
   else console.log("Connected to MongoDB Database");
 });
 
-const PORT = 3000;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(cors());
@@ -42,6 +35,6 @@ app.use("/api", routes);
 const start = require("./start/start");
 app.use("/start", start);
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log(`Server Started at ${PORT}`);
 });

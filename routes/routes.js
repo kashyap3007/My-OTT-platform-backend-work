@@ -64,12 +64,16 @@ router.post("/post", async (req, res) => {
 
 router.get("/get", async (req, res) => {
   try {
-    const data = await Model.find();
+    let data = await Model.find();
+    console.log("iside");;
+    data = await data.map(info => {
+      const src = `data:image/png;base64,${Buffer.from(info.image.data).toString("base64")}`;
+      return src;
+    });
+    // console.log(data);s
     res.json(data);
-    //Sends data in JSON format and ends the request
-    // console.log(data);
-    // res.
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: error.message });
   }
 });
