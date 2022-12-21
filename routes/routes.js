@@ -83,7 +83,7 @@ router.get("/start/get", async (req, res) => {
 router.get("/get", async (req, res) => {
   try {
     let data = await Model.find();
-    console.log("iside");
+    // console.log("iside");
     data = await data.map((info) => {
       const src = `data:image/png;base64,${Buffer.from(
         info.image.data
