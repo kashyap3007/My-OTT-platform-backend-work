@@ -1,1 +1,3 @@
-Backend For Hotstar
+<!-- To start the server -->
+nodemon index.js
+

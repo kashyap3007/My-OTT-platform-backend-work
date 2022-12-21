@@ -11,7 +11,6 @@ const mongoString = process.env.DATABASE_URL;
 mongoose.set("strictQuery", false);
 
 mongoose.connect(mongoString, (error) => {
-  // console.log("Madarchod");
   if (error) console.log(error);
   else console.log("Connected to MongoDB Database");
 });
@@ -30,11 +29,6 @@ app.use("/hotstar", routes);
 
 //One is the base endpoint, and the other is the contents of the routes. Now, all our endpoints will start from '/api'.
 // const router = express.Router();
-
-// Ye wala corrouseles k liye
-// const start = require("./start/start");
-// app.use("/start", start);
-// Index.js done
 
 app.listen(PORT, () => {
   console.log(`Server Started at ${PORT}`);
