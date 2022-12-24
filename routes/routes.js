@@ -14,7 +14,6 @@ const path = require("path");
 //   res.sendFile(path.join(__dirname, "../index.html"));
 // });
 
-
 router.post("/post", async (req, res) => {
   try {
     // console.log(req.body);
@@ -91,7 +90,6 @@ router.patch("/update/:id", async (req, res) => {
     const options = { new: true };
 
     const result = await Model.findByIdAndUpdate(id, updatedData, options);
-
     res.send(result);
   } catch (error) {
     res.status(400).json({ message: error.message });

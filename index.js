@@ -30,6 +30,12 @@ app.use("/hotstar", routes);
 //One is the base endpoint, and the other is the contents of the routes. Now, all our endpoints will start from '/api'.
 // const router = express.Router();
 
+const authRoute = require("./routes/auth");
+app.use("/auth", authRoute);
+
+const profile = require("./routes/profile");
+app.use("/profile", profile);
+
 app.listen(PORT, () => {
   console.log(`Server Started at ${PORT}`);
 });
