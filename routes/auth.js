@@ -9,6 +9,8 @@ const User = require("../models/user");
 // const validator = require('express-validator');
 
 router.post("/register", async (req, res) => {
+  // console.log(req.body);
+  // res.json({message: "Succesfully got data"});
   try {
     const data = new User({
       fullname: req.body.fullname,
@@ -24,6 +26,8 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
+  // console.log(req.body);
+  // console.log("Data got");
   try {
     const user = await User.findOne({ username: req.body.username });
     // !user && res.status(400).json("Wrong credentials!");

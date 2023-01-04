@@ -1,19 +1,65 @@
 const express = require("express");
-
 const router = express.Router();
-
 const User = require("../models/user");
 
 //GET USER
-router.get("/:id", async (req, res) => {
+router.get("/:username", async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
-    const { password, ...others } = user._doc;
-    res.status(200).json(others);
+    let data = await User.find();
+    data = await data.map((info) => {
+      if (info.username == req.params.username) {
+        console.log(info.username);
+        const src = `data:image/png;base64,${Buffer.from(info.image).toString(
+          "base64"
+        )}`;
+        return {
+          src,
+          fullName: info.fullname,
+          // lastName: info.fullName,
+          username: info.username,
+          email: info.email,
+        };
+      }
+    });
+
+    res.json(data);
+
+    // console.log(madarchod);
+    // console.log(data);
+
+    // let hello = false;
+    // data = await data.map((info) => {
+    //   if (info.username == req.params.username) {
+    //     hello = true;
+    //     console.log("Madarchod");
+    //     return;
+    //   }
+    // info.username === req.params.username;
+    // });
+
+    // if (hello) {
+    //   // console.log("MC");
+    //   res.json(data);
+    // }
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+//GET USER
+// router.get("/:username", async (req, res) => {
+//   try {
+//     let data = await User.find({});
+
+//     data = await data.filter((info) => {
+//       return info.username === req.params.username;
+//     });
+
+//     res.json(data);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
 
 // Patch
 router.patch("/update/:id", async (req, res) => {

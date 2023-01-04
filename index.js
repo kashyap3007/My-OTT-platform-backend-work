@@ -29,6 +29,14 @@ app.use("/hotstar", routes);
 
 //One is the base endpoint, and the other is the contents of the routes. Now, all our endpoints will start from '/api'.
 // const router = express.Router();
+// app.get("/", (req, res)=>{
+//   res.send("Hello world");
+// })
+
+app.patch("/upload", (req, res)=>{
+  console.log(req.body);
+  res.json("Success");
+})
 
 const authRoute = require("./routes/auth");
 app.use("/auth", authRoute);

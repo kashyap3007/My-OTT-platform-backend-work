@@ -13,6 +13,9 @@ const path = require("path");
 //   console.log(__dirname);
 //   res.sendFile(path.join(__dirname, "../index.html"));
 // });
+// router.get("/", (req, res)=>{
+//   res.send("Hello world");
+// })
 
 router.post("/post", async (req, res) => {
   try {
