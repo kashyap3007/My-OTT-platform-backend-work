@@ -63,41 +63,77 @@ router.get("/:username", async (req, res) => {
 
 // Patch
 router.patch("/update/:id", async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-
-    if (user.password != req.body.password) {
-      res.status(400).json(" Sorry! Wrong Password!......");
+  // console.log(req.body);
+  // console.log(req.files.file.data);
+  const user = await User.findById(req.params.id);
+  // if (!req.body.password) {
+  //   res.json("Please Enter Password!");
+  // } else
+  if (user.password === req.body.password) {
+    const { password, ...others } = req.body;
+    if (req.files) {
+      User.findByIdAndUpdate(
+        req.params.id,
+        { ...others, image: req.files.file.data },
+        (err, doc) => {
+          if (!err) {
+            console.log("success");
+            // console.log(doc);
+            res.json("success");
+          } else {
+            console.log(err);
+            res.json("failed");
+          }
+        }
+      );
     } else {
-      if (req.body.image) {
-        const file = req.files.image.data;
-        const { password, ...others } = req.body;
-        //   console.log(others);
-        const updatedData = others;
-        const id = req.params.id;
-
-        const options = { new: true };
-        const result = await User.findByIdAndUpdate(
-          id,
-          { ...updatedData, image: file },
-          options
-        );
-        res.send(result);
-      } else {
-        const { password, ...others } = req.body;
-        //   console.log(others);
-        const updatedData = others;
-        const id = req.params.id;
-
-        const options = { new: true };
-        const result = await User.findByIdAndUpdate(id, updatedData, options);
-        res.send(result);
-      }
+      User.findByIdAndUpdate(req.params.id, { ...others }, (err, doc) => {
+        if (!err) {
+          console.log("success");
+          // console.log(doc);
+          res.json("success");
+        } else {
+          console.log(err);
+          res.json("failed");
+        }
+      });
     }
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
+  } else {
+    res.json("Wrong password");
   }
+  // try {
+  //   const user = await User.findById(req.params.id);
+  //   if (user.password != req.body.password) {
+  //     res.status(400).json(" Sorry! Wrong Password!......");
+  //   } else {
+  //     if (req.body.image) {
+  //       const file = req.files.image.data;
+  //       const { password, ...others } = req.body;
+  //       //   console.log(others);
+  //       const updatedData = others;
+  //       const id = req.params.id;
+
+  //       const options = { new: true };
+  //       const result = await User.findByIdAndUpdate(
+  //         id,
+  //         { ...updatedData, image: file },
+  //         options
+  //       );
+  //       res.send(result);
+  //     } else {
+  //       const { password, ...others } = req.body;
+  //       //   console.log(others);
+  //       const updatedData = others;
+  //       const id = req.params.id;
+  //       const options = { new: true };
+  //       const result = await User.findByIdAndUpdate(id, updatedData, options);
+  //       res.send(result);
+  //     }
+  //   }
+  // } catch (err) {
+  //   console.log(err);
+  //   res.status(500).json(err);
+  // }
 });
 
 //delete

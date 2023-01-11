@@ -8,6 +8,8 @@ const productSchema = new mongoose.Schema({
   },
   image: {
     data: Buffer,
+    // min: 20,
+    // max: 200,
   },
   details: {
     required: true,
@@ -17,4 +19,5 @@ const productSchema = new mongoose.Schema({
 
 // console.log(productSchema);
 module.exports = mongoose.model("Data", productSchema);
+module.exports = mongoose.model("Sports", productSchema);
 // console.log(mongoose.model);

@@ -6,6 +6,8 @@ const Model = require("../models/model");
 const fs = require("fs");
 const path = require("path");
 
+const Sports = require("../models/model");
+
 // console.log(Model);
 //we are using Router from Express, and we are exporting it too using module.exports.
 
@@ -16,6 +18,26 @@ const path = require("path");
 // router.get("/", (req, res)=>{
 //   res.send("Hello world");
 // })
+
+router.post("/sports/post", async (req, res) => {
+  try {
+    const file = req.files.image;
+    const data = new Sports({
+      name: req.body.name,
+      image: {
+        data: file.data,
+        contentType: "image/png/jpg/jpeg",
+      },
+      details: req.body.details,
+    });
+
+    const dataToSave = await data.save();
+    res.status(200).json(data);
+    console.log("Success!");
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
 router.post("/post", async (req, res) => {
   try {

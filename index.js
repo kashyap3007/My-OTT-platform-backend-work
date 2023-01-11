@@ -33,10 +33,10 @@ app.use("/hotstar", routes);
 //   res.send("Hello world");
 // })
 
-app.patch("/upload", (req, res)=>{
-  console.log(req.body);
-  res.json("Success");
-})
+// app.patch("/upload", (req, res)=>{
+//   console.log(req.body);
+//   res.json("Success");
+// })
 
 const authRoute = require("./routes/auth");
 app.use("/auth", authRoute);
