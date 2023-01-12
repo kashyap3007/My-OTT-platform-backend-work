@@ -134,7 +134,7 @@ router.get("/start/get", async (req, res) => {
       const src = `data:image/png;base64,${Buffer.from(
         info.image.data
       ).toString("base64")}`;
-      return { src, name: info.name, details: info.details };
+      return {id:info._id, src, name: info.name, details: info.details };
     });
     res.json(data);
   } catch (error) {
@@ -151,7 +151,7 @@ router.get("/get", async (req, res) => {
       const src = `data:image/png;base64,${Buffer.from(
         info.image.data
       ).toString("base64")}`;
-      return { src, name: info.name, details: info.details };
+      return {id:info._id, src, name: info.name, details: info.details };
     });
     res.json(data);
   } catch (error) {
@@ -167,7 +167,7 @@ router.get("/sports/get", async (req, res) => {
       const src = `data:image/png;base64,${Buffer.from(
         info.image.data
       ).toString("base64")}`;
-      return { src, name: info.name, details: info.details };
+      return {id:info._id, src, name: info.name, details: info.details };
     });
     res.json(data);
   } catch (error) {
@@ -184,7 +184,7 @@ router.get("/movies/get", async (req, res) => {
       const src = `data:image/png;base64,${Buffer.from(
         info.image.data
       ).toString("base64")}`;
-      return { src, name: info.name, details: info.details };
+      return {id:info._id, src, name: info.name, details: info.details };
     });
     res.json(data);
   } catch (error) {
@@ -202,7 +202,7 @@ router.get("/tv/get", async (req, res) => {
       const src = `data:image/png;base64,${Buffer.from(
         info.image.data
       ).toString("base64")}`;
-      return { src, name: info.name, details: info.details };
+      return {id:info._id, src, name: info.name, details: info.details };
     });
     res.json(data);
   } catch (error) {
@@ -219,6 +219,7 @@ router.get("/special/get", async (req, res) => {
         info.image.data
       ).toString("base64")}`;
       return {
+        id:info._id,
         src,
         name: info.name,
         details: info.details,
