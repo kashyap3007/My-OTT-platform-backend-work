@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
-const Schema = mongoose;
-
-//Latest And Trending Page
+const { Schema } = mongoose;
 
 const productSchema = new mongoose.Schema({
   name: {
@@ -13,7 +11,7 @@ const productSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    default: "Model",
+    default: "Special",
   },
   details: {
     required: true,
@@ -21,7 +19,4 @@ const productSchema = new mongoose.Schema({
   },
 });
 
-// console.log(productSchema);
-module.exports = mongoose.model("Data", productSchema);
-
-// console.log(mongoose.model);
+module.exports = mongoose.model("Special", productSchema);

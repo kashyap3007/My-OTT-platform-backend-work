@@ -2,11 +2,12 @@ const express = require("express");
 
 const router = express.Router();
 
+//Model -- Trending Page
 const Model = require("../models/model");
-const fs = require("fs");
-const path = require("path");
-
-const Sports = require("../models/model");
+const Sports = require("../models/sports");
+const Movies = require("../models/movies");
+const Tv = require("../models/tv");
+const Special = require("../models/special");
 
 // console.log(Model);
 //we are using Router from Express, and we are exporting it too using module.exports.
@@ -18,6 +19,26 @@ const Sports = require("../models/model");
 // router.get("/", (req, res)=>{
 //   res.send("Hello world");
 // })
+
+router.post("/movies/post", async (req, res) => {
+  try {
+    const file = req.files.image;
+    const data = new Movies({
+      name: req.body.name,
+      image: {
+        data: file.data,
+        contentType: "image/png/jpg/jpeg",
+      },
+      details: req.body.details,
+    });
+
+    const dataToSave = await data.save();
+    res.status(200).json(data);
+    console.log("Success!");
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
 
 router.post("/sports/post", async (req, res) => {
   try {
@@ -39,6 +60,7 @@ router.post("/sports/post", async (req, res) => {
   }
 });
 
+//Trending Page k liye
 router.post("/post", async (req, res) => {
   try {
     // console.log(req.body);
@@ -63,6 +85,47 @@ router.post("/post", async (req, res) => {
   }
 });
 
+router.post("/tv/post", async (req, res) => {
+  try {
+    const file = req.files.image;
+    const data = new Tv({
+      name: req.body.name,
+      image: {
+        data: file.data,
+        contentType: "image/png/jpg/jpeg",
+      },
+      details: req.body.details,
+    });
+
+    const dataToSave = await data.save();
+    res.status(200).json(data);
+    console.log("Success!");
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+router.post("/special/post", async (req, res) => {
+  try {
+    const file = req.files.image;
+    const data = new Special({
+      name: req.body.name,
+      image: {
+        data: file.data,
+        contentType: "image/png/jpg/jpeg",
+      },
+      details: req.body.details,
+    });
+
+    const dataToSave = await data.save();
+    res.status(200).json(data);
+    console.log("Success!");
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+//corousels k liye
 router.get("/start/get", async (req, res) => {
   try {
     let data = await Model.find().limit(3);
@@ -80,6 +143,7 @@ router.get("/start/get", async (req, res) => {
   }
 });
 
+//trending page
 router.get("/get", async (req, res) => {
   try {
     let data = await Model.find();
@@ -88,6 +152,78 @@ router.get("/get", async (req, res) => {
         info.image.data
       ).toString("base64")}`;
       return { src, name: info.name, details: info.details };
+    });
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/sports/get", async (req, res) => {
+  try {
+    let data = await Sports.find();
+    data = await data.map((info) => {
+      const src = `data:image/png;base64,${Buffer.from(
+        info.image.data
+      ).toString("base64")}`;
+      return { src, name: info.name, details: info.details };
+    });
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+//Movies
+router.get("/movies/get", async (req, res) => {
+  try {
+    let data = await Movies.find();
+    data = await data.map((info) => {
+      const src = `data:image/png;base64,${Buffer.from(
+        info.image.data
+      ).toString("base64")}`;
+      return { src, name: info.name, details: info.details };
+    });
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Tvs
+
+router.get("/tv/get", async (req, res) => {
+  try {
+    let data = await Tv.find();
+    data = await data.map((info) => {
+      const src = `data:image/png;base64,${Buffer.from(
+        info.image.data
+      ).toString("base64")}`;
+      return { src, name: info.name, details: info.details };
+    });
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/special/get", async (req, res) => {
+  try {
+    let data = await Special.find();
+    data = await data.map((info) => {
+      const src = `data:image/png;base64,${Buffer.from(
+        info.image.data
+      ).toString("base64")}`;
+      return {
+        src,
+        name: info.name,
+        details: info.details,
+        category: info.category,
+      };
     });
     res.json(data);
   } catch (error) {
