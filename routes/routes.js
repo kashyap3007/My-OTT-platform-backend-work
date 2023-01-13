@@ -233,7 +233,7 @@ router.get("/special/get", async (req, res) => {
   }
 });
 
-// //Get by ID Method
+ //Get by ID Method
 router.get("/get/:id", async (req, res) => {
   try {
     const data = await Model.findById(req.params.id);
