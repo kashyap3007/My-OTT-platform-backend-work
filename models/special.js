@@ -13,6 +13,9 @@ const productSchema = new mongoose.Schema({
     type: String,
     default: "Special",
   },
+  url: {
+    type: String,
+  },
   details: {
     required: true,
     type: String,

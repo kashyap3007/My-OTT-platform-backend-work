@@ -13,7 +13,10 @@ const productSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    default: "Model",
+    default: "Trending",
+  },
+  url: {
+    type: String,
   },
   details: {
     required: true,

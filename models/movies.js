@@ -13,6 +13,9 @@ const productSchema = new mongoose.Schema({
     type: String,
     default: "Movies",
   },
+  url: {
+    type: String,
+  },
   details: {
     required: true,
     type: String,

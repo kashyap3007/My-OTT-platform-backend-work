@@ -17,6 +17,9 @@ const productSchema = new mongoose.Schema({
     required: true,
     type: String,
   },
+  url: {
+    type: String,
+  },
 });
 
 module.exports = mongoose.model("Tv", productSchema);
